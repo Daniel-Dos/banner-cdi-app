@@ -43,18 +43,30 @@ import jakarta.enterprise.event.Observes;
 @ApplicationScoped
 public class Banner {
 
+	private  String ENABLE_BANNER = "enable.banner";
+	private  String BANNER_FILE = "banner.file";
+	
 	public void init(@Observes @Initialized(ApplicationScoped.class) Object o) throws FileNotFoundException {
 
-		var banner = ConfigProvider.getConfig().getValue("banner.file", String.class);
+		var enableBanner = getPropertie(ENABLE_BANNER, Boolean.class);
 
-		var isr = "/banner.txt".equals(banner) ? new InputStreamReader(getClass().getResourceAsStream(banner))
-				                               : new InputStreamReader(new FileInputStream(new File(banner)));
+		if (enableBanner) {
 
-		try (var reader = new BufferedReader(isr)) {
-			var bannerOut = reader.lines().collect(Collectors.joining(System.lineSeparator()));
-			System.out.println(bannerOut);
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			var banner = getPropertie(BANNER_FILE, String.class);
+			
+			var isr = "/banner.txt".equals(banner) ? new InputStreamReader(getClass().getResourceAsStream(banner))
+					                               : new InputStreamReader(new FileInputStream(new File(banner)));
+
+			try (var reader = new BufferedReader(isr)) {
+				 var bannerOut = reader.lines().collect(Collectors.joining(System.lineSeparator()));
+				System.out.println(bannerOut);
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+			}
 		}
+	}
+	
+	private <T> T getPropertie(String key, Class<T> c) {
+		return (T) ConfigProvider.getConfig().getValue(key,c);
 	}
 }
