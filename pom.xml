@@ -12,6 +12,13 @@
 		<url>https://github.com/Daniel-Dos/banner-cdi-app.git</url>
 		<tag>HEAD</tag>
 	</scm>
+	
+	<developers>
+    <developer>
+      <id>daniel-dos</id>
+      <name>Daniel Dias</name>
+    </developer>
+    </developers>
 
 	<properties>
 		<maven.compiler.target>11</maven.compiler.target>
