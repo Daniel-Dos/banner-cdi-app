@@ -6,6 +6,13 @@
 	<artifactId>banner.cdi.app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<scm>
+		<connection>scm:git:git://github.com/Daniel-Dos/banner-cdi-app.git</connection>
+		<developerConnection>scm:git:git@github.com:Daniel-Dos/banner-cdi-app.git</developerConnection>
+		<url>https://github.com/Daniel-Dos/banner-cdi-app.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
 	<properties>
 		<maven.compiler.target>11</maven.compiler.target>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
